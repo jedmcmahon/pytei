@@ -1,7 +1,13 @@
 from lxml import etree
 import beta2unicode
 
-doc = etree.parse("sample/vitlat.xml")
+import pttei
+
+tp = pttei.teiParse()
+
+
+
+doc = etree.parse("sample/jugeng.xml")
 
 root = doc.getroot()
 
@@ -14,10 +20,6 @@ fwords = []
 for elem in tIter:
     eTag = elem.tag
 
-    if eTag not in fwords:
-        fwords.append(eTag)
+    if eTag == "foreign":
+        print(tp.parseForeign(elem))
 
-fwords.sort()
-
-for f in fwords:
-    print(f)
